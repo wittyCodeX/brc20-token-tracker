@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @import "base";
+}
+
+@layer components {
+  @import "components";
+  @import "navigation";
+  @import "buttons";
+}
+
+@layer utilities {
+  @import "utilities";
+}
+.ag-cell-focus,.ag-cell-no-focus{
+  border:none !important;
+}
+/* This CSS is to not apply the border for the column having 'no-border' class */
+.no-border.ag-cell:focus{
+  border:none !important;
+  outline: none;
+}
+.dark .ag-header {
+  background-color: #19122b;
+}
+.dark .ag-header-row.ag-header-row-column {
+  color: white;
+}
+.dark .ag-row-not-inline-editing {
+  background-color:  #19122b;
+  color:white;
+}
+.dark .ag-paging-panel {
+  background-color: #19122b;
+  color: white;
+}
+.dark .recharts-tooltip-label {
+  color: black;
+}
+.dark .ag-center-cols-viewport {
+  background-color: #19122b;
+}

@@ -1,0 +1,29 @@
+{
+  "site": {
+    "title": "Bxdx.io",
+    "base_url": "/",
+    "favicon": "/images/favicon.png",
+    "logo": "/images/logo.png",
+    "logo_white": "/images/logo-light.png",
+    "logo_width": "70",
+    "logo_height": "70",
+    "logo_text": "bxdx"
+  },
+  "settings": {
+    "theme_switcher": true,
+    "default_theme": "system",
+    "blog_folder": "posts"
+  },
+  "params": {
+    "tag_manager_id": "",
+    "footer_content": "If you want to add a logo to your token just send us the link of the logo image",
+    "copyright": ""
+  },
+  "metadata": {
+    "meta_author": "smart92dev",
+    "meta_image": "/images/og-image.png",
+    "meta_description": "Bxdx explorer"
+  },
+  "widgets": {
+  }
+}
