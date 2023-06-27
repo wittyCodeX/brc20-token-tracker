@@ -1,7 +1,4 @@
-/**
- * @type {import('next').NextConfig}
- */
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -10,8 +7,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.coinranking.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'tailwindui.com',
+      },
     ],
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

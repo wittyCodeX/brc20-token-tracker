@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+  min-height: 100vh;
+}
+
+.pagination {
+  display: flex;
+  margin: 20px;
+  justify-content: end;
+}
+
+.pagination li {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.pagination li a {
+  line-height: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+.pagination li.break {
+  border: none;
+}
+
+.pagination li.selected {
+  background-color: #91d8ff;
+}
+
+.dark .pagination li.selected {
+  background-color: #5a5fff;
+}
