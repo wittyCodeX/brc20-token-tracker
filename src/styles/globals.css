@@ -41,3 +41,17 @@ main {
 .dark .pagination li.selected {
   background-color: #5a5fff;
 }
+.navbar-line {
+  width: 100%;
+
+  > div {
+    position: unset !important;
+  }
+
+  .image {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+  }
+}
