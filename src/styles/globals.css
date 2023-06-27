@@ -1,0 +1,27 @@
+:root {
+  --backgroundColor: #101010;
+  --texcolor: #dddddd;
+}
+body {
+  background-color: var(--backgroundColor);
+  padding: 0;
+  margin: 0;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #686767;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(82, 80, 80);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(68, 66, 66);
+}

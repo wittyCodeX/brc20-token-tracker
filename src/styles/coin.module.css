@@ -1,0 +1,382 @@
+.coin_Self {
+  margin-top: 50px;
+  display: block;
+  padding: 12px;
+  position: relative;
+}
+
+.coin_basic {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.coin_basic div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+}
+
+.coinName {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.coinName h2 {
+  font-size: 3rem;
+  color: var(--texcolor);
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+}
+
+.coin_basic div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
+.coinprice {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.coinprice span {
+  color: rgb(206, 206, 201);
+  font-size: 14px;
+  padding: 3px;
+  font-family: "roboto", sans-serif;
+  text-transform: capitalize;
+}
+.coinprice h2 {
+  padding: 0;
+  margin: 0;
+  font-size: 3rem;
+  color: var(--texcolor);
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.coinprice h2 span {
+  font-size: 20px !important;
+}
+
+.name_extra {
+  font-size: 17px !important;
+  text-transform: uppercase !important;
+}
+
+.MarketCap {
+  padding: 0;
+  margin: 0;
+  font-size: 2rem !important;
+  color: var(--texcolor);
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.coin_basic > div {
+  display: flex;
+}
+
+.social {
+  display: none;
+  position: relative;
+  max-width: 300px;
+  margin-top: -30px;
+}
+
+.social ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.social a {
+  color: var(--texcolor);
+  text-decoration: none;
+  font-family: "roboto", sans-serif;
+}
+.social span {
+  height: 22px;
+  background-color: #252525;
+  padding: 2px 22px 2px 22px;
+  border-radius: 5px;
+  color: #707070;
+  font-weight: 500;
+}
+.seperator {
+  margin-top: 50px;
+  display: block;
+  border: 1px solid #2c2b2b;
+}
+.coinName span {
+  color: white;
+  width: 60px;
+  height: 60px;
+  background-color: #3a3636;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  text-transform: uppercase;
+  font-family: "roboto", sans-serif;
+}
+.extraBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.extraBar_name {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.extraBar_name span {
+  color: #9c9a9a;
+  font-family: "roboto", sans-serif;
+}
+
+.extraBar_name h2 {
+  color: var(--texcolor);
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+.min_info {
+  position: absolute;
+  left: 29%;
+  top: 65%;
+}
+.chart {
+  position: relative;
+  margin: 50px;
+}
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.notFound h2 {
+  font-size: 8rem;
+  color: #9c9a9a;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+.notFound span {
+  color: var(--texcolor);
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+.chart_loading {
+  display: flex;
+  justify-content: center;
+}
+.chart_loading span {
+  color: var(--texcolor);
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.mobile_price {
+  display: none;
+}
+.coinlogo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.Price_display {
+  display: block;
+  padding: 10px;
+  color: white;
+  position: absolute;
+  padding: 15px;
+  width: 100%;
+  z-index: 10;
+}
+.Price_display h3 {
+  display: flex;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 35px;
+  color: #87ceeb;
+  z-index: 100;
+  margin-bottom: 15px;
+}
+.Price_display span {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  color: #9eb3bd;
+}
+@media screen and (max-width: 1110px) {
+  .social {
+    margin-top: 25px;
+  }
+  .coin_basic {
+    flex-wrap: wrap;
+    gap: 40px;
+    row-gap: 3px;
+  }
+}
+
+@media screen and (max-width: 944px) {
+  .min_info {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: 35px;
+  }
+  .social {
+    width: 100%;
+    max-width: 100%;
+  }
+  .coin_Self {
+    padding: 10px;
+  }
+  .social ul {
+    justify-content: center;
+    margin: 20px;
+  }
+  .coinprice h2 {
+    font-size: 2rem;
+  }
+  .coinprice span {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .coin_basic {
+    flex-direction: column;
+  }
+  .coin_basic div:nth-child(2) {
+    justify-content: start;
+  }
+  .coin_basic div:nth-child(1) {
+    width: 100%;
+  }
+  .hideMp {
+    display: none;
+  }
+  .coinprice {
+    justify-content: space-between !important;
+    flex-direction: row;
+    align-items: center;
+  }
+  .coin_basic {
+    row-gap: 40px;
+  }
+  .extraBar {
+    flex-wrap: wrap;
+    row-gap: 15px;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+  .coinprice span {
+    font-size: 14px;
+  }
+  .coinprice h2 {
+    font-size: 1rem !important;
+  }
+  .extraBar_name{
+        display: flex;
+    justify-content: space-between;
+    gap: 5px;
+        flex-direction: row;
+
+  }
+  .extraBar_name h2 {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .social ul {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  .social span {
+    width: auto;
+    display: block;
+    position: relative;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .chart {
+    margin: 0;
+  }
+  .mobile_price {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    transition: all ease-in-out 0.35s;
+    width: 100%;
+    height: 65px;
+    border-bottom: 1px solid #2c2b2b;
+    left: 0;
+    background-color: #100d0d;
+    display: block;
+  }
+
+  .MobilePrice {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    color: white;
+  }
+
+  .MobilePrice > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .mobile_price > div h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: var(--texcolor);
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .PriceUSD {
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: var(--texcolor);
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+  }
+  .nonLogo {
+    color: white;
+    width: 40px;
+    height: 40px;
+    background-color: #3a3636;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    text-transform: uppercase;
+    font-family: "roboto", sans-serif;
+  }
+}
