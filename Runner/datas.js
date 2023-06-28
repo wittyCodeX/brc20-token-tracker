@@ -86,7 +86,6 @@ export async function SearchCoin(coin) {
     const unisatData = await axios.get(
       `${UNI_SAT_API}/brc20/${coin.id.toLowerCase()}/info`
     );
-    console.log(unisatData);
     if (unisatData.data.data && unisatData.status === 200) {
       tokenData = [unisatData.data.data];
       if (coin.uuid !== "") {
@@ -119,6 +118,62 @@ export async function getChart({ uuid, ticker }) {
     }
     return null;
   } catch (error) {
+    return null;
+  }
+}
+export function getGlobalChart(tokenList) {
+  try {
+    let totalMarketHistory = [];
+    let totalVolumeHistory = [];
+    let totalMarketCap = 0;
+    let totalVolume = 0;
+    for (let i = 0; i < tokenList.length; i++) {
+      let itemMarketData = [];
+      let itemVolumeData = [];
+      totalMarketCap += Number(tokenList[i].marketCap);
+      totalVolume += Number(tokenList[i]["24hVolume"]);
+      for (let j = 0; j < tokenList[i].sparkline.length; j++) {
+        const marketHistory =
+          tokenList[i].marketCap *
+          (tokenList[i].sparkline[j] / tokenList[i].price);
+        itemMarketData.push(marketHistory);
+        const volumeHistory =
+          tokenList[i]["24hVolume"] *
+          (tokenList[i].sparkline[j] / tokenList[i].price);
+        itemVolumeData.push(volumeHistory);
+      }
+      totalMarketHistory.push(itemMarketData);
+      totalVolumeHistory.push(itemVolumeData);
+    }
+    let marketCapHistory = [];
+    let volumeHistory = [];
+
+    if (totalMarketHistory.length > 0) {
+      for (let j = 0; j < totalMarketHistory[0].length; j++) {
+        let num = totalMarketHistory[0][j];
+        for (let i = 1; i < totalMarketHistory.length; i++) {
+          num += totalMarketHistory[i][j];
+        }
+        marketCapHistory.push(num);
+      }
+    }
+    if (totalVolumeHistory.length > 0) {
+      for (let j = 0; j < totalVolumeHistory[0].length; j++) {
+        let num = totalVolumeHistory[0][j];
+        for (let i = 1; i < totalVolumeHistory.length; i++) {
+          num += totalVolumeHistory[i][j];
+        }
+        volumeHistory.push(num);
+      }
+    }
+    return {
+      marketCapHistory: marketCapHistory,
+      volumeHistory: volumeHistory,
+      totalMarketCap: totalMarketCap,
+      totalVolume: totalVolume
+    };
+  } catch (error) {
+    console.log(error);
     return null;
   }
 }

@@ -3,7 +3,7 @@ import style from "../../styles/component/header.module.css";
 import * as AIicon from "react-icons/ai";
 import * as FIicons from "react-icons/fa";
 import { useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Trend from "./trend";
 function Header() {
