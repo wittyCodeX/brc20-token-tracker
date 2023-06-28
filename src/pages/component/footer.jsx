@@ -17,7 +17,7 @@ export default function footer() {
           </span>
         </div>
         <div className={style.copyright}>
-          <span>BRC-20 Insider © 2023 - insiderbrc20@gmail.com</span>
+          <span>BRC-20 Insider © 2023 - Mo@bxdx.io</span>
         </div>
       </footer>
     </div>
