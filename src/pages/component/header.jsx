@@ -12,8 +12,8 @@ function Header() {
   const headerData = [
     { name: "BRC-20 Tokens", ref: "/", span: "" },
     { name: "Global BRC-20 Chart", ref: "/global", span: "new" },
-    { name: "Marketplace", ref: "https://oxdx.xyz/", span: "soon" },
-    { name: "Product", ref: "/", span: "soon" },
+    { name: "Swap BRC20", ref: "https://www.bxdx.io/", span: "" },
+    { name: "inscribe", ref: "https://looksordinal.com/", span: "" },
   ];
   const divRef = useRef();
   const [q, setq] = useState(null);
