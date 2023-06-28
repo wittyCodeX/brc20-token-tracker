@@ -18,16 +18,12 @@ function Header() {
   const [showMB, setShowMB] = useState(false);
 
   const [data, setdata] = useState(null);
-  async function SearchHandler() {
-    if (q == null) {
-      return;
+  async function SearchHandler(e) {
+    if (e.keyCode === 13) {
+      location.href = "/coin/" + q + "?uuid=";
     }
-    const result = await SearchCoin(q);
-    console.log(result);
-    setdata(result);
   }
   useEffect(() => {
-    SearchHandler();
   }, [q]);
 
   useEffect(() => {
@@ -83,6 +79,9 @@ function Header() {
               }}
               onChange={(e) => {
                 setq(e.target.value);
+              }}
+              onKeyUp={(e) => {
+                SearchHandler(e)
               }}
             />{" "}
             <div className={style.search_token}>

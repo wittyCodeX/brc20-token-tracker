@@ -67,7 +67,27 @@
   border-radius: 100%;
   object-fit: cover;
 }
-
+.pagination {
+  display: flex;
+  margin: 2em 4em 0em 4em;
+  justify-content: center;
+  line-spacing: 3rem;
+}
+.paginationItem {
+  display: block;
+  border-radius: 10px;
+  border: solid 1px gray;
+  margin: 0px 5px 0px 5px;
+  padding: 8px 15px 8px 15px;
+  font-size: 20px;
+  font-weight: semibold;
+  color:white;
+}
+.paginationItem:hover {
+   cursor:pointer;
+   background-color: gray;
+   color:white;
+}
 @media screen and (max-width: 972px) {
   .hide_L {
     display: none;

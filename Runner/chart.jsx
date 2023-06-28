@@ -1,15 +1,14 @@
 import { createChart } from "lightweight-charts";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import moment from "moment";
 import { getChart } from "./datas";
 import style from "../src/styles/coin.module.css";
-function chart(props) {
+function Chart(props) {
   const chart_ref = useRef();
   const [data, setData] = useState(null);
   async function CreateCharts() {
     const id = props.data.IN;
-    const chartData = await getChart(props.data.name, 7);
+    const chartData = await getChart(props.data);
     setData(chartData);
   }
 
@@ -57,19 +56,20 @@ function chart(props) {
       },
     };
     const chart = createChart(chart_ref.current, option);
+    console.log(data.change)
     const lineSeries = chart.addAreaSeries({
-      topColor: props.data.change > 0 ? "rgb(25, 156, 99)" : "rgb(145, 56, 49)",
+      topColor: data.change > 0 ? "rgb(25, 156, 99)" : "rgb(145, 56, 49)",
       bottomColor: "rgb(0, 0, 0)",
-      lineColor: props.data.change > 0 ? "#19d98b" : "#e73842",
+      lineColor: data.change > 0 ? "#19d98b" : "#e73842",
       lineWidth: 4,
     });
-    console.log(data);
-    lineSeries.setData(data);
+    const seriesData = data.history.map((item, index) => ({ time: item.timestamp, value: Number(item.price) }))
+    lineSeries.setData(seriesData.reverse());
   }, [data]);
 
   useEffect(() => {
-    if (props) CreateCharts();
-  }, [props]);
+    if (props.data) CreateCharts();
+  }, [props.data]);
 
   return (
     <div className={style.chart}>
@@ -94,4 +94,4 @@ function chart(props) {
   );
 }
 
-export default chart;
+export default Chart;

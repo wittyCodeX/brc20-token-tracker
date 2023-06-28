@@ -1,26 +1,25 @@
 //Gainer Looser Volume
 
-import axios from "axios";
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { API } from "../../../Runner/datas";
+import { useState, useEffect } from "react";
 import style from "../../styles/component/header.module.css";
-function Gainer() {
-  const [data, setdata] = useState(null);
-  async function GetData() {
-    try {
-      const url = `${API}/gainer`;
-      const fire = await axios.get(url);
-      if (fire.data && fire.data.error === false) {
-        setdata(fire.data.data);
-      }
-    } catch (error) {}
-  }
+function Gainer(props) {
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    GetData();
-  }, []);
+    if (props.data && props.data.length > 0) {
+      const data1 = [...props.data];
+      const data2 = [...props.data];
+      const changeOrder = data1.sort((a, b) => a.change - b.change)
+      const volumeOrder = data2.sort((a, b) => b.marketCap - a.marketCap)
+      setData({
+        Gainer: changeOrder.slice(-4),
+        Looser: changeOrder.slice(0, 4),
+        VolumeUSD: volumeOrder.slice(0, 4)
+      });
+    }
+  }, [props.data])
+
   return (
     <div>
       {data !== null ? (
@@ -34,12 +33,12 @@ function Gainer() {
                 <ul>
                   {data.Gainer.map((el, index) => {
                     return (
-                      <a href={`/coin/${el.Name}`} key={index}>
+                      <a href={`/coin/${el.symbol}?uuid=${el.uuid}`} key={index}>
                         <h3>
-                          <span>{index + 1}</span> {el.Name}
+                          <span>{index + 1}</span> {el.name}
                         </h3>
                         <h6 style={{ color: "#19d98b" }}>
-                          +{Number(el.Changes.replace("-", "+")).toFixed(2)}%
+                          +{Number(el.change.replace("-", "+")).toFixed(2)}%
                         </h6>
                       </a>
                     );
@@ -55,15 +54,15 @@ function Gainer() {
                 <ul>
                   {data.Looser.map((el, index) => {
                     return (
-                      <a href={`/coin/${el.Name}`} key={index}>
+                      <a href={`/coin/${el.symbol}?uuid=${el.uuid}`} key={index}>
                         <h3>
-                          <span>{index + 1}</span> {el.Name}
+                          <span>{index + 1}</span> {el.name}
                         </h3>
                         <h6 style={{ color: "#e73842" }}>
                           -
                           {Number(
-                            Number(el.Changes) < 100
-                              ? el.Changes.replace("-", "")
+                            Number(el.change) < 100
+                              ? el.change.replace("-", "")
                               : "100"
                           ).toFixed(2)}
                           %
@@ -82,13 +81,13 @@ function Gainer() {
                 <ul>
                   {data.VolumeUSD.map((el, index) => {
                     return (
-                      <a href={`/coin/${el.Name}`} key={index}>
+                      <a href={`/coin/${el.symbol}?uuid=${el.uuid}`} key={index}>
                         <h3>
-                          <span>{index + 1}</span> {el.Name}
+                          <span>{index + 1}</span> {el.name}
                         </h3>
                         <h6>
                           $
-                          {Number(el.VolumeUSD).toLocaleString(undefined, {
+                          {Number(el.marketCap).toLocaleString(undefined, {
                             maximumFractionDigits: 0,
                           })}
                         </h6>

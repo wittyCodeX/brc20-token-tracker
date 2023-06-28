@@ -23,46 +23,46 @@ const Info = (data) => {
   }, [headActive]);
   return (
     <>
-      {data.data !== null && data.data !== undefined ? (
+      {data !== null && data !== undefined ? (
         <div className={style.coin_Self}>
           <div className={style.coin_basic}>
             <div>
               {/* Name */}
 
               <div className={style.coinName}>
-                {data.data.Logo ? (
+                {data.data[1].coin?.iconUrl ? (
                   <img
                     className={style.coinlogo}
-                    src={`../logo/${data.data.Logo}`}
+                    src={data.data[1].coin.iconUrl}
                   />
                 ) : (
                   <span>
                     {" "}
-                    {data.data.name.slice(0, 1)}
-                    {data.data.name.slice(-1)}
+                    {data.data[0].ticker.slice(0, 1)}
+                    {data.data[0].ticker.slice(-1)}
                   </span>
                 )}{" "}
-                <h2>{data.data.name}</h2>
+                <h2>{data.data[0].ticker}</h2>
               </div>
             </div>
             <div>
               <div className={style.coinprice}>
                 <span>
-                  {data.data.name} Price{" "}
-                  <span className={style.name_extra}>({data.data.name})</span>
+                  {data.data[0].name} Price{" "}
+                  <span className={style.name_extra}>({data.data[0].ticker})</span>
                 </span>
                 <h2>
-                  ${data.data.PriceUSD}{" "}
+                  ${data.data[1].coin?.price? Number(data.data[1].coin?.price).toFixed(6): 0}{" "}
                   <span
                     style={{
-                      color: data.data.change < 0 ? "#e73842" : "#19d98b",
+                      color: data.data[1].coin.change < 0 ? "#e73842" : "#19d98b",
                     }}
                   >
-                    {data.data.change.toFixed(2)}%
+                    { data.data[1].coin?.change ? data.data[1].coin?.change: 0 }%
                   </span>
                 </h2>
                 <span className={style.hideMp}>
-                  {data.data.PriceSatoshi} Sats
+                  {data.data[1].coin?.btcPrice? data.data[1].coin?.btcPrice: 0} Sats
                 </span>
               </div>
               {/* Price */}
@@ -72,7 +72,7 @@ const Info = (data) => {
                 <span>Market Cap </span>
                 <h2 className={style.MarketCap}>
                   $
-                  {Number(data.data.MarketCap).toLocaleString(undefined, {
+                  {Number(data.data[1].coin?.marketCap?data.data[1].coin?.marketCap: 0 ).toLocaleString(undefined, {
                     maximumFractionDigits: 2,
                   })}
                 </h2>
@@ -84,7 +84,7 @@ const Info = (data) => {
                 <span>Volume 24h </span>
                 <h2 className={style.MarketCap}>
                   $
-                  {Number(data.data.VolumeUSD).toLocaleString(undefined, {
+                  {Number(data.data[1].coin['24hVolume']? data.data[1].coin['24hVolume']: 0).toLocaleString(undefined, {
                     maximumFractionDigits: 2,
                   })}
                 </h2>
@@ -99,7 +99,7 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Holder</span>
                   <h2 className={style.extraBar_value}>
-                    {Number(data.data.Holder).toLocaleString(undefined, {
+                    {Number(data.data[0].holdersCount).toLocaleString(undefined, {
                       maximumFractionDigits: 2,
                     })}
                   </h2>
@@ -110,7 +110,7 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Limit/Mint</span>
                   <h2 className={style.extraBar_value}>
-                    {Number(data.data.limit).toLocaleString(undefined, {
+                    {Number(data.data[0].limit).toLocaleString(undefined, {
                       maximumFractionDigits: 2,
                     })}
                   </h2>
@@ -121,7 +121,7 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Total Supply</span>
                   <h2 className={style.extraBar_value}>
-                    {Number(data.data.Supply).toLocaleString(undefined, {
+                    {Number(data.data[0].totalMinted).toLocaleString(undefined, {
                       maximumFractionDigits: 2,
                     })}
                   </h2>
@@ -132,8 +132,8 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Deployed Date</span>
                   <h2 className={style.extraBar_value}>
-                    {moment(data.data.DeployedTime * 1000).format("Y-M-D")} (
-                    {moment(data.data.DeployedTime * 1000).fromNow()})
+                    {moment(data.data[0].deployBlocktime * 1000).format("Y-M-D")} (
+                    {moment(data.data[0].deployBlocktime * 1000).fromNow()})
                   </h2>
                   {/* Volume */}
                 </div>
@@ -160,12 +160,12 @@ const Info = (data) => {
             <div className={style.MobilePrice}>
               <div>
                 <span className={style.nonLogo}>
-                  {data.data.name.slice(0, 1)}
-                  {data.data.name.slice(-1)}
+                  {data.data[0].ticker.slice(0, 1)}
+                  {data.data[0].ticker.slice(-1)}
                 </span>
-                <h2>{data.data.name}</h2>
+                <h2>{data.data[0].ticker}</h2>
               </div>
-              <span className={style.PriceUSD}>${data.data.PriceUSD}</span>
+              <span className={style.PriceUSD}>${data.data[1].coin?.price}</span>
             </div>
           </div>
           <hr className={style.seperator} />

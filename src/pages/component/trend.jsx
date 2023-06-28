@@ -4,20 +4,16 @@ import { FaFire } from "react-icons/fa";
 import { useEffect } from "react";
 import { API } from "../../../Runner/datas";
 import axios from "axios";
-function Trend() {
+function Trend(props) {
   const [data, setData] = useState(null);
-  async function GetTrend() {
-    try {
-      const url = `${API}/trend`;
-      const fire = await axios.get(url);
-      if (fire.data && fire.data.error == false) {
-        setData(fire.data.data);
-      }
-    } catch (error) {}
-  }
+
   useEffect(() => {
-    GetTrend();
-  }, []);
+    if (props.data && props.data.length > 0) {
+      const trend = [...props.data].sort((a, b) => b.marketCap - a.marketCap).slice(0, 20);
+      setData(trend);
+
+    }
+  }, [props.data]);
   return (
     <>
       {data !== null ? (
@@ -33,20 +29,20 @@ function Trend() {
                 return (
                   <a
                    key={index}
-                    href={`/coin/${el.Name}?utm_source=WebsiteTrend&utm_medium=trend_web&utm_campaign=hottoken`}
+                    href={`/coin/${el.symbol}?uuid=${el.uuid}`}
                   >
                     <span key={index}>
                       <h6 style={{ color: index == 0 ? "red" : "" }}>
                         #{index + 1}
                       </h6>{" "}
-                      {el.Name}{" "}
+                      {el.name}{" "}
                       <h5
                         style={{
-                          color: Number(el.changes) > 0 ? "#19d98b": "#e73842" ,
+                          color: Number(el.change) > 0 ? "#19d98b": "#e73842" ,
                         }}
                         className={style.change_trend}
                       >
-                        {el.changes ? Number(el.changes).toFixed(2) + "%" : ""}
+                        {el.change ? Number(el.change).toFixed(2) + "%" : ""}
                       </h5>
                     </span>
                   </a>
