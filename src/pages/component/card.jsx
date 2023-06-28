@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import style from "../../styles/component/header.module.css";
 import Gainer from "./glv";
 function card(props) {
@@ -38,6 +39,15 @@ function card(props) {
       {data !== null ? (
         <div className={style.card_main}>
           <div className={style.card_brc}>
+            <a href="https://t.me/INFINITEBTC" target={'_blank'}>
+              <Image
+                width={200}
+                height={200}
+                src={`/ad.png`}
+                alt="AD"
+              />
+            </a>
+            
             {card.map((el, index) => {
               return (
                 <div key={index} className={style.card_item}>
@@ -46,6 +56,14 @@ function card(props) {
                 </div>
               );
             })}
+            <a href="https://t.me/INFINITEBTC" target={'_blank'}>
+            <Image
+              width={200}
+              height={200}
+              src="/ad.png"
+              alt="AD"
+            />
+            </a>
           </div>
         </div>
       ) : (
