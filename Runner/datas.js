@@ -87,8 +87,8 @@ export async function SearchCoin(coin) {
       `${UNI_SAT_API}/brc20/${coin.id.toLowerCase()}/info`
     );
     console.log(unisatData);
-    if (unisatData.data && unisatData.status === 200) {
-      tokenData = unisatData.data.data;
+    if (unisatData.data.data && unisatData.status === 200) {
+      tokenData = [unisatData.data.data];
       if (coin.uuid !== "") {
         const url = `${COIN_RANKING_URL}/coin/${coin.uuid}`;
         const fire = await axios.get(url, {

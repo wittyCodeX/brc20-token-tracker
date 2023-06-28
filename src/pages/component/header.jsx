@@ -3,9 +3,12 @@ import style from "../../styles/component/header.module.css";
 import * as AIicon from "react-icons/ai";
 import * as FIicons from "react-icons/fa";
 import { useRef, useEffect } from "react";
-import { SearchCoin } from "../../../Runner/datas";
+import { useSelector, useDispatch } from "react-redux";
+
 import Trend from "./trend";
 function Header() {
+  const tokenData = useSelector((RootState) => RootState.tokenData);
+
   const headerData = [
     { name: "BRC-20 Tokens", ref: "/", span: "" },
     { name: "Global BRC-20 Chart", ref: "/global", span: "new" },
@@ -18,13 +21,20 @@ function Header() {
   const [showMB, setShowMB] = useState(false);
 
   const [data, setdata] = useState(null);
+  const [priceTokenData, setPriceTokenData] = useState(null);
   async function SearchHandler(e) {
     if (e.keyCode === 13) {
-      location.href = "/coin/" + q + "?uuid=";
+      const tokenWithUUID = priceTokenData.filter((token) => token.name.toLowerCase() === q.toLowerCase());
+      if  (tokenWithUUID.length > 0) {
+        location.href = "/coin/" + q + "?uuid=" + tokenWithUUID[0].uuid;
+      } else {
+        location.href = "/coin/" + q + "?uuid=";
+      }
     }
   }
   useEffect(() => {
-  }, [q]);
+    setPriceTokenData(tokenData.tokenPriceData)
+  }, [tokenData.tokenPriceData]);
 
   useEffect(() => {
     const ChekIFOutside = (e) => {

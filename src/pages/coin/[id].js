@@ -43,7 +43,7 @@ function Coin(props) {
           position: "relative"
         }}
       >
-        {token !== null ? (
+        {token !== null && token[0] !== null ? (
           <>
             <title>{`${token[0].ticker} - BRC-20 Insider`}</title>
             <meta
