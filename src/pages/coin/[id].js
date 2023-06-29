@@ -43,34 +43,34 @@ function Coin(props) {
           position: "relative"
         }}
       >
-        {token !== null && token[0] !== null ? (
+        {token !== null && token.unisat !== null ? (
           <>
-            <title>{`${token[0].ticker} - BRC-20 Insider`}</title>
+            <title>{`${token.unisat.ticker} - BRC-20 Insider`}</title>
             <meta
               name='description'
-              content={`Check the Live Price, MarketCap of ${token[0].ticker}`}
+              content={`Check the Live Price, MarketCap of ${token.unisat.ticker}`}
             />
-            <title>{`${token[0].ticker} - BRC-20 Insider`}</title>
+            <title>{`${token.unisat.ticker} - BRC-20 Insider`}</title>
             <meta
               name='description'
-              content={`Check the Live Price, Chart, MarketCap of ${token[0].ticker} | ($${token[0].ticker}), ${token[0].ticker} Token live chart. `}
+              content={`Check the Live Price, Chart, MarketCap of ${token.unisat.ticker} | ($${token.unisat.ticker}), ${token.unisat.ticker} Token live chart. `}
             />
             <meta
               property='og:title'
-              content={`${token[0].ticker} Price: ${token[0].ticker} Live Price and Chart | BRC-20 Insider`}
+              content={`${token.unisat.ticker} Price: ${token.unisat.ticker} Live Price and Chart | BRC-20 Insider`}
             />
             <meta property='og:type' content='website' />
             <meta
               property='og:description'
-              content={`See the latest ${token[0].ticker} BRC-20 price, market cap, trading volume, Holder, chart and more with BRC-20 Insider&#39;s live ${token[0].ticker} price chart and most popular BRC-20 Tokens with BRC-20 Insider.`}
+              content={`See the latest ${token.unisat.ticker} BRC-20 price, market cap, trading volume, Holder, chart and more with BRC-20 Insider&#39;s live ${token.unisat.ticker} price chart and most popular BRC-20 Tokens with BRC-20 Insider.`}
             />
             <meta
               name='keywords'
-              content={`${token[0].ticker}, $${token[0].ticker}, ${token[0].ticker} BRC-20, ${token[0].ticker} Chart, ${token[0].ticker} Price, ${token[0].ticker} coin, ${token[0].ticker} Token, ${token[0].ticker} chart`}
+              content={`${token.unisat.ticker}, $${token.unisat.ticker}, ${token.unisat.ticker} BRC-20, ${token.unisat.ticker} Chart, ${token.unisat.ticker} Price, ${token.unisat.ticker} coin, ${token.unisat.ticker} Token, ${token.unisat.ticker} chart`}
             />
             <meta
               property='og:url'
-              content={`https://brc20insider.com/coin/${token[0].ticker}`}
+              content={`https://brc20insider.com/coin/${token.unisat.ticker}`}
             />
             <meta property='og:site_name' content='BRC-20 Insider'></meta>
           </>

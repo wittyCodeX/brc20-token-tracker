@@ -30,39 +30,39 @@ const Info = (data) => {
               {/* Name */}
 
               <div className={style.coinName}>
-                {data.data[1]?.coin.iconUrl ? (
+                {data.data.coinranking.coin?.iconUrl ? (
                   <img
                     className={style.coinlogo}
-                    src={data.data[1]?.coin.iconUrl}
+                    src={data.data.coinranking.coin?.iconUrl}
                   />
                 ) : (
                   <span>
                     {" "}
-                    {data.data[0].ticker.slice(0, 1)}
-                    {data.data[0].ticker.slice(-1)}
+                    {data.data.unisat.ticker.slice(0, 1)}
+                    {data.data.unisat.ticker.slice(-1)}
                   </span>
                 )}{" "}
-                <h2>{data.data[0].ticker}</h2>
+                <h2>{data.data.unisat.ticker}</h2>
               </div>
             </div>
             <div>
               <div className={style.coinprice}>
                 <span>
-                  {data.data[0].name} Price{" "}
-                  <span className={style.name_extra}>({data.data[0].ticker})</span>
+                  {data.data.unisat.name} Price{" "}
+                  <span className={style.name_extra}>({data.data.unisat.ticker})</span>
                 </span>
                 <h2>
-                  ${data.data[1]?.coin.price? Number(data.data[1]?.coin.price).toFixed(6): 0}{" "}
+                  ${data.data.coinranking.coin?.price? Number(data.data.coinranking.coin?.price).toFixed(6): 0}{" "}
                   <span
                     style={{
-                      color: data.data[1]?.coin.change < 0 ? "#e73842" : "#19d98b",
+                      color: data.data.coinranking.coin?.change < 0 ? "#e73842" : "#19d98b",
                     }}
                   >
-                    { data.data[1]?.coin.change ? data.data[1]?.coin.change: 0 }%
+                    { data.data.coinranking.coin?.change ? data.data.coinranking.coin?.change: 0 }%
                   </span>
                 </h2>
                 <span className={style.hideMp}>
-                  {data.data[1]?.coin.btcPrice? data.data[1]?.coin.btcPrice: 0} Sats
+                  {data.data.coinranking.coin?.btcPrice? data.data.coinranking.coin?.btcPrice: 0} Sats
                 </span>
               </div>
               {/* Price */}
@@ -72,7 +72,7 @@ const Info = (data) => {
                 <span>Market Cap </span>
                 <h2 className={style.MarketCap}>
                   $
-                  {Number(data.data[1]?.coin.marketCap?data.data[1]?.coin.marketCap: 0 ).toLocaleString(undefined, {
+                  {Number(data.data.coinranking.coin?.marketCap?data.data.coinranking.coin?.marketCap: 0 ).toLocaleString(undefined, {
                     maximumFractionDigits: 2,
                   })}
                 </h2>
@@ -84,7 +84,7 @@ const Info = (data) => {
                 <span>Volume 24h </span>
                 <h2 className={style.MarketCap}>
                   $
-                  {Number(data.data[1]?.coin['24hVolume']? data.data[1]?.coin['24hVolume']: 0).toLocaleString(undefined, {
+                  {Number(data.data.coinranking.coin? data.data.coinranking.coin['24hVolume']: 0).toLocaleString(undefined, {
                     maximumFractionDigits: 2,
                   })}
                 </h2>
@@ -99,7 +99,7 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Holder</span>
                   <h2 className={style.extraBar_value}>
-                    {Number(data.data[0].holdersCount).toLocaleString(undefined, {
+                    {Number(data.data.unisat.holdersCount).toLocaleString(undefined, {
                       maximumFractionDigits: 2,
                     })}
                   </h2>
@@ -110,7 +110,7 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Limit/Mint</span>
                   <h2 className={style.extraBar_value}>
-                    {Number(data.data[0].limit).toLocaleString(undefined, {
+                    {Number(data.data.unisat.limit).toLocaleString(undefined, {
                       maximumFractionDigits: 2,
                     })}
                   </h2>
@@ -121,7 +121,7 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Total Supply</span>
                   <h2 className={style.extraBar_value}>
-                    {Number(data.data[0].totalMinted).toLocaleString(undefined, {
+                    {Number(data.data.unisat.totalMinted).toLocaleString(undefined, {
                       maximumFractionDigits: 2,
                     })}
                   </h2>
@@ -132,8 +132,8 @@ const Info = (data) => {
                 <div className={style.extraBar_name}>
                   <span>Deployed Date</span>
                   <h2 className={style.extraBar_value}>
-                    {moment(data.data[0].deployBlocktime * 1000).format("Y-M-D")} (
-                    {moment(data.data[0].deployBlocktime * 1000).fromNow()})
+                    {moment(data.data.unisat.deployBlocktime * 1000).format("Y-M-D")} (
+                    {moment(data.data.unisat.deployBlocktime * 1000).fromNow()})
                   </h2>
                   {/* Volume */}
                 </div>
@@ -160,12 +160,12 @@ const Info = (data) => {
             <div className={style.MobilePrice}>
               <div>
                 <span className={style.nonLogo}>
-                  {data.data[0].ticker.slice(0, 1)}
-                  {data.data[0].ticker.slice(-1)}
+                  {data.data.unisat.ticker.slice(0, 1)}
+                  {data.data.unisat.ticker.slice(-1)}
                 </span>
-                <h2>{data.data[0].ticker}</h2>
+                <h2>{data.data.unisat.ticker}</h2>
               </div>
-              <span className={style.PriceUSD}>${data.data[1]?.coin.price}</span>
+              <span className={style.PriceUSD}>${data.data.coinranking.coin?.price}</span>
             </div>
           </div>
           <hr className={style.seperator} />

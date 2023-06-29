@@ -87,7 +87,10 @@ export async function SearchCoin(coin) {
       `${UNI_SAT_API}/brc20/${coin.id.toLowerCase()}/info`
     );
     if (unisatData.data.data && unisatData.status === 200) {
-      tokenData = [unisatData.data.data];
+      tokenData = {
+        unisat: unisatData.data.data,
+        coinranking: {}
+      };
       if (coin.uuid !== "") {
         const url = `${COIN_RANKING_URL}/coin/${coin.uuid}`;
         const fire = await axios.get(url, {
@@ -95,7 +98,10 @@ export async function SearchCoin(coin) {
           params: { referenceCurrencyUuid: "yhjMzLPhuIDl" }
         });
         if (fire.data && fire.status === 200) {
-          tokenData = [tokenData, fire.data.data];
+          tokenData = {
+            ...tokenData,
+            coinranking: fire.data.data
+          };
         }
       }
       return tokenData;
