@@ -8,9 +8,7 @@ import Header from "../component/header";
 import Info from "./info";
 import Chart from "../../../Runner/chart";
 import Footer from "../component/footer";
-import Banner from "../component/banner.js";
 import { useRouter } from "next/router";
-import Loading from "../component/loading";
 export async function getServerSideProps(context) {
   const { params } = context;
   return {
@@ -81,7 +79,18 @@ function Coin(props) {
         {/* <Banner /> */}
         <div>
           {token === undefined ? (
-            <Loading />
+            <div className={style.chart_loading}>
+              <span
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  minHeight: "100vh"
+                }}
+              >
+                Chart is Loading...
+              </span>
+            </div>
           ) : token !== null ? (
             <>
               <Info data={token} />

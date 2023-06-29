@@ -58,7 +58,7 @@ function card(props) {
             })}
             <a href="https://antoni-fave-music.netlify.app/" target={'_blank'}>
             <Image
-              width={180}
+              width={200}
               height={200}
               src="/qrcode.jpg"
               alt="AD"
