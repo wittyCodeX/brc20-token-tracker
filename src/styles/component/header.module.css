@@ -243,6 +243,26 @@
   color: #575d77;
 }
 
+/* Loading */
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 80%;
+  height: 700px;
+}
+.loading_status {
+  margin: auto;
+  padding: 8em 0em 8em 8em;
+}
+/*  w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600 */
+.loadingSVG {
+  text-align: center;
+  color: rgba(100, 255, 100, 0.4);
+  background-color: transparency;
+}
 /* Trend */
 
 .TrendContainer {

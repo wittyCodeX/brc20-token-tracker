@@ -10,7 +10,7 @@ import Chart from "../../../Runner/chart";
 import Footer from "../component/footer";
 import Banner from "../component/banner.js";
 import { useRouter } from "next/router";
-
+import Loading from "../component/loading";
 export async function getServerSideProps(context) {
   const { params } = context;
   return {
@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
 
 function Coin(props) {
   const router = useRouter();
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState();
   const tokenData = useSelector((RootState) => RootState.tokenData);
   useEffect(() => {
     async function loadTokenData() {
@@ -43,7 +43,7 @@ function Coin(props) {
           position: "relative"
         }}
       >
-        {token !== null && token.unisat !== null ? (
+        {token !== null && token !== undefined && token.unisat !== null ? (
           <>
             <title>{`${token.unisat.ticker} - BRC-20 Insider`}</title>
             <meta
@@ -80,7 +80,9 @@ function Coin(props) {
         <Header />
         {/* <Banner /> */}
         <div>
-          {token !== null ? (
+          {token === undefined ? (
+            <Loading />
+          ) : token !== null ? (
             <>
               <Info data={token} />
               <Chart data={router.query} />

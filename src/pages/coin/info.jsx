@@ -52,7 +52,7 @@ const Info = (data) => {
                   <span className={style.name_extra}>({data.data.unisat.ticker})</span>
                 </span>
                 <h2>
-                  ${data.data.coinranking.coin?.price? Number(data.data.coinranking.coin?.price).toFixed(6): 0}{" "}
+                  ${data.data.coinranking.coin?.price? Number(data.data.coinranking.coin?.price).toFixed(9): 0}{" "}
                   <span
                     style={{
                       color: data.data.coinranking.coin?.change < 0 ? "#e73842" : "#19d98b",

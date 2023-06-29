@@ -307,7 +307,7 @@ const Main = () => {
                         <td>
                           $
                           {el.price != (undefined || null)
-                            ? parseFloat(el.price).toFixed(5)
+                            ? parseFloat(el.price).toFixed(9)
                             : "0.00"}
                         </td>
                         <td>

@@ -5,16 +5,14 @@ import { getChart } from "./datas";
 import style from "../src/styles/coin.module.css";
 function Chart(props) {
   const chart_ref = useRef();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   async function CreateCharts() {
-    const id = props.data.IN;
     const chartData = await getChart(props.data);
     setData(chartData);
   }
 
   useEffect(() => {
-    if (data == null) return;
-
+    if (data === undefined) return;
     const option = {
       width: chart_ref.current.clientWidth,
       height: 700,
@@ -56,14 +54,20 @@ function Chart(props) {
       },
     };
     const chart = createChart(chart_ref.current, option);
-    console.log(data.change)
     const lineSeries = chart.addAreaSeries({
-      topColor: data.change > 0 ? "rgb(25, 156, 99)" : "rgb(145, 56, 49)",
+      topColor:
+        data && data.change > 0 ? "rgb(25, 156, 99)" : "rgb(145, 56, 49)",
       bottomColor: "rgb(0, 0, 0)",
-      lineColor: data.change > 0 ? "#19d98b" : "#e73842",
+      lineColor: data && data.change > 0 ? "#19d98b" : "#e73842",
       lineWidth: 4,
     });
-    const seriesData = data.history.map((item, index) => ({ time: item.timestamp, value: Number(item.price) }))
+    console.log(data);
+    const seriesData = data
+      ? data.history.map((item, index) => ({
+          time: item.timestamp,
+          value: Number(item.price),
+        }))
+      : [{ time: moment.now(), value: 0 }];
     lineSeries.setData(seriesData.reverse());
   }, [data]);
 
@@ -73,23 +77,17 @@ function Chart(props) {
 
   return (
     <div className={style.chart}>
-      {data !== null ? (
-        <div
-          style={{
-            borderRadius: "11px",
-            width: "100%",
-            border: "1px solid #2b2b34",
-            position: "relative",
-            marginTop: "50px",
-            display: "block",
-          }}
-          ref={chart_ref}
-        ></div>
-      ) : (
-        <div className={style.chart_loading}>
-          <span>Chart is Loading...</span>
-        </div>
-      )}
+      <div
+        style={{
+          borderRadius: "11px",
+          width: "100%",
+          border: "1px solid #2b2b34",
+          position: "relative",
+          marginTop: "50px",
+          display: "block",
+        }}
+        ref={chart_ref}
+      ></div>
     </div>
   );
 }

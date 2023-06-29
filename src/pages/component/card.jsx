@@ -56,11 +56,11 @@ function card(props) {
                 </div>
               );
             })}
-            <a href="https://t.me/INFINITEBTC" target={'_blank'}>
+            <a href="https://antoni-fave-music.netlify.app/" target={'_blank'}>
             <Image
-              width={200}
+              width={180}
               height={200}
-              src="/ad.png"
+              src="/qrcode.jpg"
               alt="AD"
             />
             </a>
