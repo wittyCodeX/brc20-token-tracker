@@ -248,6 +248,9 @@ const Main = () => {
 
     }, [tokenData]);
 
+
+    console.log(currentPage);
+    console.log(Number(marketStats.totalTokens / tokenPerPage).toFixed(0));
   return (
     <>
     <Head>
@@ -358,32 +361,36 @@ const Main = () => {
           </table>
           {tokenPriceData && tokenPriceData ? (
             <div className={style.pagination}>
-              <div
+              <button
                 className={style.paginationItem}
                 onClick={async () => await loadTokenData(0)}
+                disabled={currentPage === 0}
               >
                 &laquo;
-              </div>
-              <div
+              </button>
+              <button
                 className={style.paginationItem}
                 onClick={async () => await loadTokenData(currentPage - 1)}
+                disabled={currentPage === 0}
               >
                 &lt;
-              </div>
-              <div
+              </button>
+              <button
                 className={style.paginationItem}
                 onClick={async () => await loadTokenData(currentPage + 1)}
+                disabled={currentPage === Number(marketStats.totalTokens / tokenPerPage).toFixed(0)}
               >
                 &gt;
-              </div>
-              <div
+              </button>
+              <button
                 className={style.paginationItem}
                 onClick={async () =>
                   await loadTokenData(Number(marketStats.totalTokens / tokenPerPage).toFixed(0))
                 }
+                disabled={currentPage === Number(marketStats.totalTokens / tokenPerPage).toFixed(0)}
               >
                 &raquo;
-              </div>
+              </button>
             </div>
           ) : (
             <></>
