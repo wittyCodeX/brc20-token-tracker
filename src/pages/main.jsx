@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import Head from "next/head";
 import {
   GetStatsData,
   getTokenPriceData,
@@ -92,7 +92,7 @@ const Main = () => {
       );
 
       if (currentPage === lastPage) {
-        returnedData = getTokenListFromStore((currentPage + 1) * tokenPerPage);
+        returnedData = getTokenListFromStore((currentPage) * tokenPerPage);
       } else {
         if (
           ((currentPage + 1) * tokenPerPage < offsetFromStart &&
@@ -250,6 +250,7 @@ const Main = () => {
 
   return (
     <>
+    <Head>
       <title>BRC-20 Insider - Live Index site for BRC-20 technology.</title>
       <meta
         name="description"
@@ -259,6 +260,8 @@ const Main = () => {
         name="keywords"
         content="BRC-20, BRC-20 Token, BRC-20 Insider, BRC-20 Coins, BRC-20 Tracker,  BRC-20 Market, BRC-20 Token Price, BRC-20 mint, New BRC-20 Token, BRC-20 charts, BRC-20 Top Token,"
       />
+    </Head>
+
       {tokenData.tokenPriceData !== null ? <Trend data={tokenData.tokenPriceData} /> : ""}
       {marketStats !== null ? <Card data={marketStats} /> : ""}
       {tokenData.tokenPriceData !== null ? <Gainer data={tokenData.tokenPriceData} /> : ""}

@@ -5,7 +5,15 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{`BRC-20 Insider`}</title>
+        <title>BRC-20 Insider - Live Index site for BRC-20 technology.</title>
+        <meta
+          name='description'
+          content='Live Index site for BRC-20 technology. See the live price, chart, Marketcap of BRC-20 Tokens.'
+        />
+        <meta
+          name='keywords'
+          content='BRC-20, BRC-20 Token, BRC-20 Insider, BRC-20 Coins, BRC-20 Tracker,  BRC-20 Market, BRC-20 Token Price, BRC-20 mint, New BRC-20 Token, BRC-20 charts, BRC-20 Top Token,'
+        />
         <meta
           property='og:title'
           content={`Live Price and Chart | BRC-20 Insider`}
