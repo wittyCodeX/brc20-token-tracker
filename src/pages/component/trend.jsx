@@ -16,7 +16,7 @@ function Trend(props) {
   }, [props.data]);
   return (
     <>
-      {data !== null ? (
+      {props.data !== undefined ? (
         <div className={style.TrendContainer}>
           <div className={style.Trending_text}>
             <span>
@@ -25,7 +25,7 @@ function Trend(props) {
           </div>
           <div className={style.TrendingContent}>
             <ul>
-              {data.map((el, index) => {
+              {data && data.map((el, index) => {
                 return (
                   <a
                    key={index}

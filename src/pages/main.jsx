@@ -140,21 +140,19 @@ const Main = () => {
         />
       </Head>
 
-      {tokenData.tokenPriceData !== null ? (
-        <Trend data={tokenData.tokenPriceData} />
+      {tokenPriceData !== null ? (
+        <Trend data={tokenPriceData} />
       ) : (
         ""
       )}
       {marketStats !== null ? <Card data={marketStats} /> : ""}
-      {tokenData.tokenPriceData !== null ? (
-        <Gainer data={tokenData.tokenPriceData} />
+      {tokenPriceData !== null ? (
+        <Gainer data={tokenPriceData} />
       ) : (
         ""
       )}
-
       <main style={{ height: finalData ? "auto" : " 100vh" }}>
         <div className={style.coin_class_table}>
-          {!isLoading ? (
           <table>
             <thead>
               <tr>
@@ -174,8 +172,8 @@ const Main = () => {
                 <th className={style.hide_L}>Limit Per Mint</th>
               </tr>
             </thead>
-            {finalData && finalData.length > 0
-              ? finalData.map((el, index) => {
+            { !isLoading ?
+              finalData && finalData.length > 0 ? finalData.map((el, index) => {
                   return (
                     <tbody key={index}>
                       <tr>
@@ -246,22 +244,22 @@ const Main = () => {
                     </tbody>
                   );
                 })
-              : ""}
+              : ""
+            : (
+              <tbody>
+                <tr>
+                  <td colspan={9}>
+                    <div className={style.chart_loading}>
+                      <div className={style.loading_span}>
+                        Token List is Loading...
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            )}
           </table>
-          ): (
-            <div className={style.chart_loading}>
-              <span
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  minHeight: "100vh"
-                }}
-              >
-                Token List is Loading...
-              </span>
-            </div>
-          )}
+
           {tokenList ? (
             <div className={style.pagination}>
               <button
