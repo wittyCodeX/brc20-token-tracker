@@ -89,6 +89,18 @@
    background-color: gray;
    color:white;
 }
+
+.chart_loading {
+  display: flex;
+  justify-content: center;
+}
+.chart_loading span {
+  color: var(--texcolor);
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+
 @media screen and (max-width: 972px) {
   .hide_L {
     display: none;

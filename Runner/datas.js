@@ -9,7 +9,7 @@ export async function GetStatsData() {
   let stats = {
     totalTokens: 0,
     marketCap: 0,
-    volume: 0
+    volume: 0,
   };
   try {
     const fire = await axios.get(`${UNI_SAT_API}/brc20/status`, {
@@ -19,8 +19,8 @@ export async function GetStatsData() {
         start: 0,
         limit: 1,
         complete: "",
-        sort: "deploy"
-      }
+        sort: "deploy",
+      },
     });
     if (fire.data && fire.status === 200) {
       stats.totalTokens = fire.data.data.total;
@@ -28,8 +28,8 @@ export async function GetStatsData() {
     const response = await axios.get(`${COIN_RANKING_URL}/stats/coins`, {
       headers: headers,
       params: {
-        tag: "brc-20"
-      }
+        tag: "brc-20",
+      },
     });
 
     if (response.data && response.status === 200) {
@@ -50,8 +50,8 @@ export const getTokenPriceData = async () => {
     headers: headers,
     params: {
       tags: ["brc-20"],
-      limit: 200
-    }
+      limit: 200,
+    },
   });
 
   if (response.data && response.status === 200) {
@@ -71,8 +71,8 @@ export const getRawTokenListFromAPI = async (from, limit) => {
       start: from,
       limit: limit,
       complete: "",
-      sort: "deploy"
-    }
+      sort: "holders",
+    },
   });
   if (response.data && response.status === 200) {
     validTokens = response.data.data.detail;
@@ -89,18 +89,18 @@ export async function SearchCoin(coin) {
     if (unisatData.data.data && unisatData.status === 200) {
       tokenData = {
         unisat: unisatData.data.data,
-        coinranking: {}
+        coinranking: {},
       };
       if (coin.uuid !== "") {
         const url = `${COIN_RANKING_URL}/coin/${coin.uuid}`;
         const fire = await axios.get(url, {
           headers: headers,
-          params: { referenceCurrencyUuid: "yhjMzLPhuIDl" }
+          params: { referenceCurrencyUuid: "yhjMzLPhuIDl" },
         });
         if (fire.data && fire.status === 200) {
           tokenData = {
             ...tokenData,
-            coinranking: fire.data.data
+            coinranking: fire.data.data,
           };
         }
       }
@@ -117,7 +117,7 @@ export async function getChart({ uuid, ticker }) {
     const url = `${COIN_RANKING_URL}/coin/${uuid}/history`;
     const fire = await axios.get(url, {
       headers: headers,
-      params: { timePeriod: "24h", referenceCurrencyUuid: "yhjMzLPhuIDl" }
+      params: { timePeriod: "24h", referenceCurrencyUuid: "yhjMzLPhuIDl" },
     });
     if (fire.data && fire.status === 200) {
       return fire.data.data;
@@ -176,10 +176,62 @@ export function getGlobalChart(tokenList) {
       marketCapHistory: marketCapHistory,
       volumeHistory: volumeHistory,
       totalMarketCap: totalMarketCap,
-      totalVolume: totalVolume
+      totalVolume: totalVolume,
     };
   } catch (error) {
     console.log(error);
     return null;
   }
 }
+
+export const formatData = (priceData, rawData) => {
+  if (priceData && rawData) {
+    const returned = {
+      ticker: rawData.ticker,
+      holdersCount: rawData.holdersCount,
+      decimal: rawData.decimal,
+      limit: rawData.limit,
+      minted: rawData.minted,
+      max: rawData.max,
+      deployedTime: rawData.deployBlocktime,
+      inscriptionId: rawData.inscriptionId,
+      inscriptionNumberStart: rawData.inscriptionNumberStart,
+      volume24h: priceData["24hVolume"],
+      price: priceData.price,
+      symbol: priceData.symbol,
+      marketCap: priceData.marketCap,
+      change: priceData.change,
+      iconUrl: priceData.iconUrl,
+      color: priceData.color,
+      uuid: priceData.uuid,
+      btcPrice: priceData.btcPrice,
+      coinrankingUrl: priceData.coinrankingUrl,
+    };
+    return returned;
+  } else if (!priceData && rawData) {
+    const returned = {
+      ticker: rawData.ticker,
+      holdersCount: rawData.holdersCount,
+      decimal: rawData.decimal,
+      limit: rawData.limit,
+      minted: rawData.minted,
+      max: rawData.max,
+      deployedTime: rawData.deployBlocktime,
+      inscriptionId: rawData.inscriptionId,
+      inscriptionNumberStart: rawData.inscriptionNumberStart,
+      volume24h: 0,
+      price: 0,
+      marketCap: 0,
+      change: 0,
+      iconUrl: "",
+      btcPrice: 0,
+      color: "#FFF",
+      uuid: "",
+      symbol: "",
+      coinrankingUrl: "",
+    };
+    return returned;
+  } else {
+    return null;
+  }
+};

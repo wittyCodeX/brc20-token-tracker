@@ -4,7 +4,6 @@ const initialState = {
   tokenPerPage: 10,
   currentPage: 0,
   offsetFromStart: 0,
-  offsetFromEnd: 0
 };
 
 const tokenReducer = (state = initialState, action) => {
@@ -12,7 +11,7 @@ const tokenReducer = (state = initialState, action) => {
     case "SET_TOKEN_PRICE_DATA":
       return {
         ...state,
-        tokenPriceData: action.payload
+        tokenPriceData: action.payload,
       };
     case "ADD_TOKEN_LIST":
       let newTokenList = [];
@@ -28,27 +27,22 @@ const tokenReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        tokenList: newTokenList
+        tokenList: newTokenList,
       };
     case "SET_TOKEN_PER_PAGE":
       return {
         ...state,
-        tokenPerPage: action.payload
+        tokenPerPage: action.payload,
       };
     case "SET_CURRENT_PAGE":
       return {
         ...state,
-        currentPage: action.payload
+        currentPage: action.payload,
       };
     case "SET_OFFSET_FROM_START":
       return {
         ...state,
-        offsetFromStart: action.payload
-      };
-    case "SET_OFFSET_FROM_END":
-      return {
-        ...state,
-        offsetFromEnd: action.payload
+        offsetFromStart: action.payload,
       };
     default:
       return state;
