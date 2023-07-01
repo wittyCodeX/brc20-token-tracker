@@ -7,7 +7,7 @@ import {
   GetStatsData,
   getTokenPriceData,
   getRawTokenListFromAPI,
-  formatData
+  formatData,
 } from "../../Runner/datas";
 import style from "../styles/main.module.css";
 import Footer from "./component/footer";
@@ -17,8 +17,8 @@ import Trend from "./component/trend";
 
 const Main = () => {
   const dispatch = useDispatch();
-  const marketStats = useSelector(RootState => RootState.stats);
-  const tokenData = useSelector(RootState => RootState.tokenData);
+  const marketStats = useSelector((RootState) => RootState.stats);
+  const tokenData = useSelector((RootState) => RootState.tokenData);
   const [finalData, setFinalData] = useState([]);
   const [isExpandNeeded, setIsExpandNeeded] = useState(false);
   const [offset, setOffset] = useState(2);
@@ -33,14 +33,12 @@ const Main = () => {
   );
   const [tokenList, setTokenList] = useState(tokenData.tokenList);
   const [tokenPerPage, setTokenPerPage] = useState(tokenData.tokenPerPage);
-  
+
   // get tokenList to display
-  const loadTokenData = async index => {
+  const loadTokenData = async (index) => {
     let returnedData;
     setFinalData([]);
     setIsLoading(true);
-    console.log(currentPage);
-    console.log(offsetFromStart);
     if (index <= offsetFromStart) {
       // First
       returnedData = getTokenListFromStore(index);
@@ -48,24 +46,24 @@ const Main = () => {
       const rawData = await getRawTokenListFromAPI(index, tokenPerPage);
       let formattedData = [];
       for (let i = 0; i < rawData.length; i++) {
-          formattedData.push(formatData(null, rawData[i]));
+        formattedData.push(formatData(null, rawData[i]));
       }
       returnedData = formattedData;
     }
     setFinalData(returnedData);
     setIsLoading(false);
     setCurrentPage(index);
-    dispatch({ type: "SET_CURRENT_PAGE", payload: index});
+    dispatch({ type: "SET_CURRENT_PAGE", payload: index });
   };
 
   // get tokenList from store
-  const getTokenListFromStore = from => {
+  const getTokenListFromStore = (from) => {
     const tokenPerPage = tokenData.tokenPerPage;
     if (from >= 0) return tokenList.slice(from, from + tokenPerPage);
     else return tokenList.slice(from);
   };
 
-  const sortTokenData = index => {};
+  const sortTokenData = (index) => {};
 
   useEffect(() => {
     async function getData() {
@@ -80,36 +78,29 @@ const Main = () => {
       const tokens = await getTokenPriceData();
       if (tokens && tokens.length > 0) {
         dispatch({ type: "SET_TOKEN_PRICE_DATA", payload: tokens });
-        const expectedOffset = Math.ceil(Number(tokens.length) / Number(tokenPerPage)) + offset;
-        const rawData = await getRawTokenListFromAPI(0, tokenPerPage * expectedOffset);
+        const rawData = await getRawTokenListFromAPI(0, 250);
         let lastIndex = 0;
         let matchingCount = 0;
         let formattedData = [];
-        const priceTokenNameArray = tokens.map(token => token.name);
-        const filtered = rawData.filter(token => priceTokenNameArray.includes(token.ticher));
-        if (priceTokenNameArray.length === filtered.length) {
-          for (let i = 0; i < rawData.length; i++) {
-            const priceInfo = tokens.filter(token => {
-              rawData[i].ticker === token.name.toLowerCase();
-            });
-            if (priceInfo.length > 0) {
-              formattedData.push(formatData(priceInfo, rawData[i]));
-            } else {
-              formattedData.push(formatData(null, rawData[i]));
-            }
+        for (let i = 0; i < rawData.length; i++) {
+          const priceInfo = tokens.filter((token) => {
+            return rawData[i].ticker.toLowerCase() === token.symbol.toLowerCase();
+          });
+          if (priceInfo.length > 0) {
+            formattedData.push(formatData(priceInfo[0], rawData[i]));
+          } else {
+            formattedData.push(formatData(null, rawData[i]));
           }
-          dispatch({ type: "SET_OFFSET_FROM_START", payload: expectedOffset});
-          dispatch({ type: "ADD_TOKEN_LIST", payload: formattedData.sort((a, b) => b.marketCap - a.marketCap) });
-          setDataPrepared(true);
-        } else {
-          setIsExpandNeeded(true);
-          const newOffset = offset + 1;
-          setOffset(newOffset);
         }
+        dispatch({ type: "SET_OFFSET_FROM_START", payload: 25 });
+        dispatch({
+          type: "ADD_TOKEN_LIST",
+          payload: formattedData.sort((a, b) => b.marketCap - a.marketCap),
+        });
       }
     }
     getTokens();
-  }, [isExpandNeeded]);
+  }, []);
 
   useEffect(() => {
     async function loadTokenDataFrom(from) {
@@ -140,17 +131,9 @@ const Main = () => {
         />
       </Head>
 
-      {tokenPriceData !== null ? (
-        <Trend data={tokenPriceData} />
-      ) : (
-        ""
-      )}
+      {tokenPriceData !== null ? <Trend data={tokenPriceData} /> : ""}
       {marketStats !== null ? <Card data={marketStats} /> : ""}
-      {tokenPriceData !== null ? (
-        <Gainer data={tokenPriceData} />
-      ) : (
-        ""
-      )}
+      {tokenPriceData !== null ? <Gainer data={tokenPriceData} /> : ""}
       <main style={{ height: finalData ? "auto" : " 100vh" }}>
         <div className={style.coin_class_table}>
           <table>
@@ -172,8 +155,9 @@ const Main = () => {
                 <th className={style.hide_L}>Limit Per Mint</th>
               </tr>
             </thead>
-            { !isLoading ?
-              finalData && finalData.length > 0 ? finalData.map((el, index) => {
+            {!isLoading ? (
+              finalData && finalData.length > 0 ? (
+                finalData.map((el, index) => {
                   return (
                     <tbody key={index}>
                       <tr>
@@ -216,39 +200,41 @@ const Main = () => {
                         <td className={style.hide_MC}>
                           $
                           {Number(el.marketCap).toLocaleString(undefined, {
-                            maximumFractionDigits: 2
+                            maximumFractionDigits: 2,
                           })}
                         </td>
                         <td className={style.hide_V}>
                           $
                           {Number(el.volume24h).toLocaleString(undefined, {
-                            maximumFractionDigits: 2
+                            maximumFractionDigits: 2,
                           })}
                         </td>
                         <td className={style.hide_S}>
                           {Number(el.max).toLocaleString(undefined, {
-                            maximumFractionDigits: 0
+                            maximumFractionDigits: 0,
                           })}
                         </td>
                         <td className={style.hide_H}>
                           {Number(el.holdersCount).toLocaleString(undefined, {
-                            maximumFractionDigits: 0
+                            maximumFractionDigits: 0,
                           })}
                         </td>
                         <td className={style.hide_L}>
                           {Number(el.limit).toLocaleString(undefined, {
-                            maximumFractionDigits: 0
+                            maximumFractionDigits: 0,
                           })}
                         </td>
                       </tr>
                     </tbody>
                   );
                 })
-              : ""
-            : (
+              ) : (
+                ""
+              )
+            ) : (
               <tbody>
                 <tr>
-                  <td colspan={9}>
+                  <td colSpan={9}>
                     <div className={style.chart_loading}>
                       <div className={style.loading_span}>
                         Token List is Loading...

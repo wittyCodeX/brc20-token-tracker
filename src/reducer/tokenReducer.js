@@ -14,20 +14,9 @@ const tokenReducer = (state = initialState, action) => {
         tokenPriceData: action.payload,
       };
     case "ADD_TOKEN_LIST":
-      let newTokenList = [];
-      console.log(state.tokenList);
-      if (state.tokenList.length === 0) {
-        newTokenList = [...action.payload].sort(
-          (a, b) => b.inscriptionNumberStart > a.inscriptionNumberStart
-        );
-      } else {
-        newTokenList = [...state.tokenList, ...action.payload].sort(
-          (a, b) => b.inscriptionNumberStart > a.inscriptionNumberStart
-        );
-      }
       return {
         ...state,
-        tokenList: newTokenList,
+        tokenList: action.payload,
       };
     case "SET_TOKEN_PER_PAGE":
       return {

@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import style from "../../styles/component/header.module.css";
 function Gainer(props) {
   const [data, setData] = useState(null);
-  console.log(props.data);
 
   useEffect(() => {
     if (props.data && props.data.length > 0) {
